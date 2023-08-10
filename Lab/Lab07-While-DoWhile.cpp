@@ -50,10 +50,53 @@
 */
 
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <time.h>
 int main() {
+    int Score = 100 ;
+    int playgame ;
+    int min = 1 ;
+    int max = 100 ;
+    int answer ;
+    srand( time( NULL ) ) ;
+    do{
+        int RandomNumber = rand() % 100 + 1 ;
+        Score = 100 ;
+        printf("\n Do you want to play game (1=play,-1=exit) :\n " ) ;
+        scanf ("%d",&playgame) ;
+        if (playgame==1) {
+            printf ("(Score=%d)",Score) ;
+            printf ("\nGuess the winning number (1-100) :");
+            scanf  ("%d" , &answer) ;
+            while (answer!=RandomNumber) {
+                Score=Score-10 ;
+                if(answer<RandomNumber){
+                    min=answer+1;
+                    printf ("Sorry, the winning number is HIGHER than %d. (Score=%d)",answer,Score) ;
+                    printf ("\nGuess the winning number (%d-%d) :",min,max) ;
+                    scanf("%d",&answer) ;
+                }
+                else{
+                    max=answer-1;
+                    printf("Sorry, the winning number is LOWER than %d. (Score=%d)",answer,Score) ;
+                    printf("\nGuess the winnig number (%d-%d) :",min,max) ;
+                    scanf("%d", &answer) ;
+                }
+                if(answer==RandomNumber) {
+                    printf("That is correct! The winning number is %d. ",RandomNumber) ;
+                    printf("Score this game: %d",Score) ;
+                    }
+                else if (answer==0) {
+                    printf("Game over : %d. ",RandomNumber) ;
+                    printf("Score this game: %d",Score) ;
+                }
 
-    //--| YOUR CODE HERE
-
+            }
+        }
+            
+        
+    
+    }  while(playgame==1) ;
     return 0 ;
+    
 }//end main function
